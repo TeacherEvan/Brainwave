@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brainwave</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <div id="game-container">
+        <div id="welcome-screen" class="screen">
+            <h1>Brainwave</h1>
+            <button id="start-button">Start Game</button>
+        </div>
+        <div id="instructions-screen" class="screen" style="display: none;">
+            <h2>Instructions</h2>
+            <p>Click on the planets to make them disappear. After they are all gone, you will be asked how many planets there were.</p>
+            <button id="play-button">Play</button>
+        </div>
+        <div id="game-screen" class="screen" style="display: none;">
+            <div id="game-ui">
+                <div id="score">Score: 0</div>
+                <div id="lives">Lives: 3</div>
+            </div>
+            <div id="planet-area"></div>
+            <div id="question-modal" style="display: none;">
+                <h2>How many planets were there?</h2>
+                <div id="answer-options"></div>
+            </div>
+        </div>
+        <div id="game-over-screen" class="screen" style="display: none;">
+            <h2>Game Over</h2>
+            <p>Enter your name:</p>
+            <input type="text" id="player-name" maxlength="20">
+            <button id="submit-score-button">Submit</button>
+        </div>
+    </div>
+    <script src="assets/js/ui.js"></script>
+    <script src="assets/js/game.js"></script>
+    <script src="assets/js/main.js"></script>
+</body>
+</html>
