@@ -34,8 +34,16 @@ const Game = (() => {
         planet.className = 'planet';
         const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff'];
         planet.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-        let x = Math.random() * (window.innerWidth - 50);
-        let y = Math.random() * (window.innerHeight - 50);
+        
+        // Ensure planets stay within visible area (account for UI and planet size)
+        const margin = 100; // Space for UI elements and planet size
+        const maxX = window.innerWidth - 100; // Account for planet size (50px) and margin
+        const maxY = window.innerHeight - 100;
+        const minX = 50;
+        const minY = 100; // Extra space for top UI
+        
+        let x = Math.random() * (maxX - minX) + minX;
+        let y = Math.random() * (maxY - minY) + minY;
         let dx = (Math.random() - 0.5) * 4;
         let dy = (Math.random() - 0.5) * 4;
 
@@ -43,8 +51,8 @@ const Game = (() => {
             x += dx;
             y += dy;
 
-            if (x < 0 || x > window.innerWidth - 50) dx *= -1;
-            if (y < 0 || y > window.innerHeight - 50) dy *= -1;
+            if (x < minX || x > maxX) dx *= -1;
+            if (y < minY || y > maxY) dy *= -1;
 
             planet.style.left = `${x}px`;
             planet.style.top = `${y}px`;
@@ -52,19 +60,36 @@ const Game = (() => {
 
         let moveInterval = setInterval(movePlanet, 20);
 
-        planet.addEventListener('touchstart', (e) => {
-            e.preventDefault(); // Prevent click events from firing
+        function handlePlanetClick(e) {
+            e.preventDefault();
             clearInterval(moveInterval);
+            
+            // Get click coordinates (handle both mouse and touch events)
+            const clientX = e.clientX || (e.touches && e.touches[0].clientX);
+            const clientY = e.clientY || (e.touches && e.touches[0].clientY);
+            
+            // Create particle effects
             for (let i = 0; i < 20; i++) {
-                UI.createParticle(e.touches[0].clientX, e.touches[0].clientY, planet.style.backgroundColor);
+                UI.createParticle(clientX, clientY, planet.style.backgroundColor);
             }
-            UI.showHitChar(e.touches[0].clientX, e.touches[0].clientY);
+            UI.showHitChar(clientX, clientY);
+            
+            // Remove the planet from DOM and array
             planet.remove();
-            planets.pop();
+            const planetIndex = planets.indexOf(planet);
+            if (planetIndex > -1) {
+                planets.splice(planetIndex, 1);
+            }
+            
+            // Check if all planets are gone
             if (planets.length === 0) {
                 askQuestion();
             }
-        });
+        }
+
+        // Add both click and touchstart event listeners
+        planet.addEventListener('click', handlePlanetClick);
+        planet.addEventListener('touchstart', handlePlanetClick);
 
         planets.push(planet);
         planetArea.appendChild(planet);
