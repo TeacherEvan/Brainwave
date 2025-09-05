@@ -37,10 +37,11 @@ const Game = (() => {
         
         // Ensure planets stay within visible area (account for UI and planet size)
         const margin = 100; // Space for UI elements and planet size
-        const maxX = window.innerWidth - 100; // Account for planet size (50px) and margin
-        const maxY = window.innerHeight - 100;
-        const minX = 50;
-        const minY = 100; // Extra space for top UI
+        const planetSize = 50; // Assumed planet size in px
+        const maxX = window.innerWidth - margin; // Account for margin
+        const maxY = window.innerHeight - margin;
+        const minX = margin / 2; // Use half margin for left boundary
+        const minY = margin; // Use margin for top boundary
         
         let x = Math.random() * (maxX - minX) + minX;
         let y = Math.random() * (maxY - minY) + minY;
