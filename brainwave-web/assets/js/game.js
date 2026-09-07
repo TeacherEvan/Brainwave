@@ -21,7 +21,7 @@ const Game = (() => {
     function startLevel() {
         planets = [];
         planetArea.innerHTML = '';
-        const numPlanets = Math.floor(Math.random() * 5) + 3; // 3-7 planets
+        const numPlanets = Math.min(3 + level + Math.floor(Math.random() * 3), 12); // scales with level, capped at 12
         correctAnswer = numPlanets;
 
         for (let i = 0; i < numPlanets; i++) {

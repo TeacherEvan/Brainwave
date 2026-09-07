@@ -155,7 +155,7 @@ document.addEventListener('DOMContentLoaded', () => {
             z-index: 1000;
             pointer-events: none;
         `;
-        successMessage.textContent = `High score saved for ${playerName}!`;
+        successMessage.textContent = `Thanks for playing, ${playerName}!`;
         gameOverScreen.appendChild(successMessage);
         
         setTimeout(() => {
