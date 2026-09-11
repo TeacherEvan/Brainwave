@@ -4,6 +4,8 @@ import random
 
 class Star:
     def __init__(self, screen_width, screen_height):
+        self.screen_width = screen_width
+        self.screen_height = screen_height
         self.x = random.randint(0, screen_width)
         self.y = random.randint(0, screen_height)
         self.speed = random.uniform(0.1, 1)
@@ -13,7 +15,7 @@ class Star:
         self.x -= self.speed
         if self.x < 0:
             self.x = screen_width
-            self.y = random.randint(0, self.screen.get_height())
+            self.y = random.randint(0, self.screen_height)
 
     def draw(self, surface):
         pygame.draw.circle(surface, (255, 255, 255), (self.x, self.y), self.radius)
