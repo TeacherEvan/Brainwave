@@ -155,8 +155,20 @@ const Game = (() => {
         }
 
         // Enhanced event handling for better touch support
-        planet.addEventListener('click', handlePlanetClick);
-        planet.addEventListener('touchstart', handlePlanetClick, { passive: false });
+        // Guard against double-fire: on touch devices, touchstart and click both fire,
+        // potentially processing the same planet twice. Use a processing flag.
+        let isProcessing = false;
+
+        function safeHandlePlanetClick(e) {
+            if (isProcessing) return;
+            isProcessing = true;
+            handlePlanetClick(e);
+            // Reset guard after the removal animation completes
+            setTimeout(() => { isProcessing = false; }, 700);
+        }
+
+        planet.addEventListener('click', safeHandlePlanetClick);
+        planet.addEventListener('touchstart', safeHandlePlanetClick, { passive: false });
         
         // Add hover effects for desktop
         planet.addEventListener('mouseenter', () => {
