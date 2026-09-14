@@ -1,2 +1,4 @@
 docs/.scratch-audit/
 __pycache__/
+.env
+highscores.txt
