@@ -7,32 +7,32 @@
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-    <div id="game-container">
-        <div id="welcome-screen" class="screen">
+    <div id="game-container" role="application" aria-label="Brainwave Counting Game">
+        <div id="welcome-screen" class="screen" role="region" aria-label="Welcome Screen">
             <h1>Brainwave</h1>
-            <button id="start-button">Start Game</button>
+            <button id="start-button" aria-label="Start the Brainwave game">Start Game</button>
         </div>
-        <div id="instructions-screen" class="screen" style="display: none;">
+        <div id="instructions-screen" class="screen" style="display: none;" role="region" aria-label="Instructions Screen">
             <h2>Instructions</h2>
             <p>Click on the planets to make them disappear. After they are all gone, you will be asked how many planets there were.</p>
-            <button id="play-button">Play</button>
+            <button id="play-button" aria-label="Begin playing the game">Play</button>
         </div>
-        <div id="game-screen" class="screen" style="display: none;">
-            <div id="game-ui">
-                <div id="score">Score: 0</div>
-                <div id="lives">Lives: 3</div>
+        <div id="game-screen" class="screen" style="display: none;" role="region" aria-label="Game Screen">
+            <div id="game-ui" aria-label="Game statistics">
+                <div id="score" aria-label="Current score">Score: 0</div>
+                <div id="lives" aria-label="Remaining lives">Lives: 3</div>
             </div>
-            <div id="planet-area"></div>
-            <div id="question-modal" style="display: none;">
-                <h2>How many planets were there?</h2>
-                <div id="answer-options"></div>
+            <div id="planet-area" aria-live="polite"></div>
+            <div id="question-modal" style="display: none;" role="dialog" aria-modal="true" aria-label="Counting question">
+                <h2 id="question-heading">How many planets were there?</h2>
+                <div id="answer-options" role="group" aria-labelledby="question-heading"></div>
             </div>
         </div>
-        <div id="game-over-screen" class="screen" style="display: none;">
+        <div id="game-over-screen" class="screen" style="display: none;" role="region" aria-label="Game Over Screen">
             <h2>Game Over</h2>
             <p>Enter your name:</p>
-            <input type="text" id="player-name" maxlength="20">
-            <button id="submit-score-button">Submit</button>
+            <input type="text" id="player-name" maxlength="20" aria-label="Enter your name">
+            <button id="submit-score-button" aria-label="Submit your name and score">Submit</button>
         </div>
     </div>
     <script src="assets/js/ui.js"></script>
